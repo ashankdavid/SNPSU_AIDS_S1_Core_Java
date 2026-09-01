@@ -63,6 +63,40 @@ public class SLL {
         }
     }
 
+    void deleteAtHead(){
+        if(head==null){
+            System.out.println("Linked List is Empty Nothing to delete!");
+            return;
+        }
+        Node toDelete = head;
+        head = head.next;
+        toDelete = null; // call Garbage Collection!
+    }
+
+    void deleteByValue(int val){
+        if(head==null){
+            System.out.println("LinkedList is Empty");
+            return;
+        }
+        if(head.data == val){
+            deleteAtHead();
+            return;
+        }
+        Node temp = head;
+        while(temp.next!=null && temp.next.data!=val){
+            temp = temp.next;
+        }
+
+        if(temp.next == null){
+            System.out.println("Value not found");
+            return;
+        }
+
+        Node toDelete = temp.next;
+        temp.next = temp.next.next;
+        toDelete = null;
+    }
+
     void printSLL(){
         Node temp = head;
         while(temp!=null){
