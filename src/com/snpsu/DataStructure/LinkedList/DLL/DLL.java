@@ -78,11 +78,51 @@ public class DLL {
     }
 
     void deleteAtHead(){
-        // Niveditha chance!! yaaayy
+        if(head==null){
+            System.out.println("Underflow");
+            return;
+        }
+        Node toDelete = head;
+        head=head.next;
+        if(head!=null){
+            head.prev=null;
+        }
+        toDelete = null;
     }
 
     void deleteByValue(int val){
-        // Keerthana chance yaayyy!!
+
+        if (head==null){
+            System.out.println("List is Empty");
+            return;
+        }
+
+        if(head.data==val){
+            Node toDelete = head;
+            head=head.next;
+
+            if(head!=null){
+                head.prev=null;
+            }
+            toDelete = null;
+            return;
+        }
+
+        Node temp=head;
+        while(temp!=null&&temp.data!=val){
+            temp=temp.next;
+        }
+
+        if(temp==null){
+            System.out.println("Value not found");
+            return;
+        }
+
+        temp.prev.next=temp.next;
+
+        if(temp.next!=null){
+            temp.next.prev=temp.prev;
+        }
     }
 
 }
