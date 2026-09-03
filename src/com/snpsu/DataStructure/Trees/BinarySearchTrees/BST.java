@@ -69,8 +69,24 @@ public class BST {
             root.right = removeRec(root.right, key);
         }else{
             // u found the node to be deleted!
-
+            // case 1 Node with 0 or 1 child
+            if(root.left == null){
+                return root.right;
+            }else if(root.right == null){
+                return root.left;
+            }
+            // case 2 Node with 2 children
+            Node successor = findSuccessor(root.right);
+            root.data = successor.data;
+            root.right = removeRec(root.right, successor.data);
         }
+        return root;
+    }
+
+    private Node findSuccessor(Node node){
+        while(node.left!=null){
+            node = node.left;
+        }return node;
     }
     void remove(int key){
         root = removeRec(root, key);
@@ -83,11 +99,17 @@ class Driver{
         BST bst = new BST();
         bst.insert(100);
         bst.insert(50);
-        bst.insert(180);
+        bst.insert(150);
         bst.insert(30);
-        bst.insert(70);
+        bst.insert(55);
         bst.insert(60);
+        bst.insert(120);
+        bst.insert(180);
+        bst.insert(100);
+        bst.insert(130);
 
         bst.DFS(bst.root);
+
+        bst.remove(55);
     }
 }
